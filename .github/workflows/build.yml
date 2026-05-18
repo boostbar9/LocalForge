@@ -63,6 +63,7 @@ jobs:
         run: cargo install tauri-cli --version "^1.6" --locked
 
       - name: Build Tauri app (release)
+        working-directory: src-tauri
         run: cargo tauri build
         env:
           # Skip the auto-updater signing step; users can install manually.
