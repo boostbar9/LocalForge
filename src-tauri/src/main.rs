@@ -61,7 +61,8 @@ fn main() {
                 // Gracefully kill backend
                 let app = window.app_handle();
                 let state: tauri::State<AppState> = app.state();
-                if let Some(mut child) = state.backend_child.lock().unwrap().take() {
+                let mut guard = state.backend_child.lock().unwrap();
+                if let Some(mut child) = guard.take() {
                     let _ = child.kill();
                 }
             }
