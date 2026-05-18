@@ -33,7 +33,7 @@
     "icon": ["icons/32x32.png", "icons/128x128.png", "icons/icon.ico"],
     "resources": ["../backend/**/*", "../resources/**/*"],
     "copyright": "© 2026 LocalForge",
-    "category": "Graphics",
+    "category": "GraphicsAndDesign",
     "shortDescription": "Local AI image and video generation",
     "longDescription": "Generate AI images and videos completely offline. No accounts, no cloud, no telemetry.",
     "windows": {
