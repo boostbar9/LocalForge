@@ -1,0 +1,32 @@
+[package]
+name = "localforge"
+version = "1.1.0"
+description = "Fully local AI image and video generation"
+authors = ["LocalForge"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "1.6", features = [] }
+
+[dependencies]
+tauri = { version = "1.6", features = ["shell-open", "dialog-open", "fs-all", "path-all", "process-exit", "window-all", "updater"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "stream"] }
+sysinfo = "0.30"
+anyhow = "1.0"
+log = "0.4"
+env_logger = "0.11"
+dirs = "5.0"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

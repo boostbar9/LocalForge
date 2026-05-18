@@ -1,0 +1,41 @@
+{
+  "_lf": {
+    "description": "HunyuanVideo 720p — near-Sora quality, ~12 min per 5s clip on RX 7900 XT (ZLUDA)",
+    "positive_node": "6", "negative_node": "7",
+    "sampler_node": "3", "latent_node": "5",
+    "checkpoint_node": "4"
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 0, "steps": 30, "cfg": 6.0,
+      "sampler_name": "dpmpp_2m", "scheduler": "sgm_uniform",
+      "denoise": 1.0,
+      "model": ["4", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["5", 0]
+    }
+  },
+  "4": {
+    "class_type": "HyVideoModelLoader",
+    "inputs": {
+      "model": "hunyuan_video_t2v_720p_bf16.safetensors",
+      "precision": "bf16",
+      "attention_mode": "sdpa",
+      "compile": "disabled"
+    }
+  },
+  "5": {
+    "class_type": "HyVideoEmptyLatent",
+    "inputs": { "width": 1280, "height": 720, "num_frames": 129 }
+  },
+  "6": { "class_type": "HyVideoTextEncode", "inputs": { "prompt": "", "model": ["4", 0] } },
+  "7": { "class_type": "HyVideoTextEncode", "inputs": { "prompt": "", "model": ["4", 0] } },
+  "8": { "class_type": "HyVideoDecode", "inputs": { "samples": ["3", 0], "model": ["4", 0] } },
+  "30": {
+    "class_type": "VHS_VideoCombine",
+    "inputs": {
+      "images": ["8", 0], "frame_rate": 24, "loop_count": 0,
+      "filename_prefix": "lf_hunyuan", "format": "video/h264-mp4",
+      "pingpong": false, "save_output": true
+    }
+  }
+}

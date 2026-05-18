@@ -1,0 +1,36 @@
+{
+  "_lf": {
+    "description": "Wan 2.1 T2V-1.3B — high-quality 5s clip @ 832×480",
+    "positive_node": "6", "negative_node": "7",
+    "sampler_node": "3", "latent_node": "5",
+    "checkpoint_node": "4"
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 0, "steps": 30, "cfg": 6.0,
+      "sampler_name": "uni_pc", "scheduler": "simple",
+      "denoise": 1.0,
+      "model": ["4", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["5", 0]
+    }
+  },
+  "4": {
+    "class_type": "WanVideoModelLoader",
+    "inputs": { "model": "Wan2.1-T2V-1.3B.safetensors", "precision": "fp16" }
+  },
+  "5": {
+    "class_type": "WanVideoEmptyLatent",
+    "inputs": { "width": 832, "height": 480, "num_frames": 81, "batch_size": 1 }
+  },
+  "6": { "class_type": "WanVideoTextEncode", "inputs": { "text": "", "model": ["4", 0] } },
+  "7": { "class_type": "WanVideoTextEncode", "inputs": { "text": "", "model": ["4", 0] } },
+  "8": { "class_type": "WanVideoDecode", "inputs": { "samples": ["3", 0], "model": ["4", 0] } },
+  "30": {
+    "class_type": "VHS_VideoCombine",
+    "inputs": {
+      "images": ["8", 0], "frame_rate": 16, "loop_count": 0,
+      "filename_prefix": "lf_wan21", "format": "video/h264-mp4",
+      "pingpong": false, "save_output": true
+    }
+  }
+}

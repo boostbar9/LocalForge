@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; overflow: hidden; }
+body {
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(1400px 700px at 85% -10%, rgba(124, 92, 255, 0.10), transparent 60%),
+    radial-gradient(1100px 600px at -10% 80%, rgba(244, 114, 182, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 50% 110%, rgba(56, 189, 248, 0.05), transparent 60%),
+    #0a0c11;
+  background-attachment: fixed;
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a2f3d; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #3a4055; }
+
+/* === Buttons === */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 font-medium
+         transition-all duration-200 select-none cursor-pointer
+         active:scale-[0.97];
+}
+.btn-primary {
+  @apply btn text-white relative overflow-hidden;
+  background: linear-gradient(135deg, #7c5cff 0%, #a78bfa 50%, #c084fc 100%);
+  box-shadow: 0 8px 28px -8px rgba(124, 92, 255, 0.55),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.btn-primary:hover {
+  box-shadow: 0 12px 36px -8px rgba(124, 92, 255, 0.75),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+.btn-primary:disabled {
+  @apply opacity-60 cursor-not-allowed;
+  transform: none;
+}
+.btn-ghost {
+  @apply btn bg-white/5 text-ink-200 hover:bg-white/10 border border-white/5;
+  backdrop-filter: blur(8px);
+}
+.btn-ghost-active {
+  @apply btn bg-accent/15 text-white border border-accent/40;
+}
+.btn-danger {
+  @apply btn bg-red-600/90 text-white hover:bg-red-600;
+}
+
+/* === Cards === */
+.card {
+  @apply bg-bg-800/70 backdrop-blur-xl border border-white/[0.06] rounded-2xl
+         transition-all duration-200;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 20px 60px -30px rgba(0, 0, 0, 0.5);
+}
+.card-hover { @apply hover:border-white/10 hover:bg-bg-800/85; }
+.card-glow {
+  background: linear-gradient(135deg, rgba(124,92,255,0.10), rgba(124,92,255,0.02));
+  @apply border-accent/30;
+}
+
+/* === Inputs === */
+.input {
+  @apply w-full bg-bg-700/60 border border-white/[0.06] rounded-xl px-3.5 py-2.5
+         text-ink-50 placeholder:text-ink-600
+         focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/30
+         transition-all duration-150;
+  backdrop-filter: blur(8px);
+}
+
+.kbd {
+  @apply text-xs font-mono px-2 py-1 rounded-md bg-bg-700/80 border border-white/10 text-ink-200;
+}
+
+/* === Animations === */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.06) 40%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.06) 60%,
+    rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 92, 255, 0.5); }
+  50%      { box-shadow: 0 0 0 12px rgba(124, 92, 255, 0); }
+}
+.pulse-glow { animation: pulse-glow 2s infinite; }
+
+/* === Pro badge === */
+.pro-badge {
+  background: linear-gradient(135deg, #f472b6, #c084fc, #818cf8);
+  background-size: 200% 200%;
+  animation: shimmer 4s ease infinite;
+  @apply text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md uppercase tracking-wider;
+}
+
+/* === Mode pill === */
+.mode-pill {
+  @apply px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-150
+         border border-transparent cursor-pointer select-none;
+}
+.mode-pill-active {
+  @apply bg-accent/20 text-white border-accent/40;
+  box-shadow: 0 0 24px -6px rgba(124, 92, 255, 0.5);
+}
+.mode-pill-inactive {
+  @apply bg-white/[0.04] text-ink-200 hover:bg-white/[0.08] hover:text-white;
+}
+
+/* Selected card */
+.card-selected {
+  @apply border-accent/60 bg-accent/[0.08];
+  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.3),
+              0 12px 40px -16px rgba(124, 92, 255, 0.5);
+}

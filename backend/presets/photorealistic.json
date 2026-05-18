@@ -1,0 +1,11 @@
+{
+  "id": "photorealistic",
+  "name": "Photorealistic",
+  "family": "sdxl",
+  "default_model": "RealVisXL_V4.0.safetensors",
+  "fallback_model": "sd_xl_base_1.0.safetensors",
+  "positive": "raw photo, photorealistic, sharp focus, natural lighting, skin texture, depth of field, 50mm, 8k",
+  "negative": "cartoon, illustration, painting, drawing, anime, render, cgi, plastic skin, low quality, blurry, watermark, text",
+  "sampler": "dpmpp_2m",
+  "scheduler": "karras"
+}

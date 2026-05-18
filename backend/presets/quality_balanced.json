@@ -1,0 +1,1 @@
+{ "id": "balanced", "steps": 30, "cfg": 6.0, "description": "Recommended default — ~10s on RX 7900 XT" }

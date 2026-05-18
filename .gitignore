@@ -1,0 +1,32 @@
+# Node
+node_modules/
+frontend/dist/
+
+# Rust / Tauri
+src-tauri/target/
+
+# Python
+__pycache__/
+*.pyc
+backend/python/
+backend/comfyui/
+
+# Runtime data
+localforge_data/
+backend/output/
+backend/cache/
+backend/logs/
+*.db
+*.log
+
+# Models — never commit
+backend/models/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.gguf
+
+# OS
+Thumbs.db
+.DS_Store

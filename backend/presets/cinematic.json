@@ -1,0 +1,10 @@
+{
+  "id": "cinematic",
+  "name": "Cinematic",
+  "family": "sdxl",
+  "default_model": "sd_xl_base_1.0.safetensors",
+  "positive": "cinematic still, anamorphic lens flare, film grain, dramatic lighting, color graded teal and orange, shallow depth of field",
+  "negative": "amateur, low quality, blurry, oversharpened, watermark",
+  "sampler": "dpmpp_2m",
+  "scheduler": "karras"
+}

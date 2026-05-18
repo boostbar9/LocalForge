@@ -1,0 +1,15 @@
+{
+  "_lf": {
+    "description": "Face restoration via CodeFormer (uses ReActor or comfyui-face-restore custom node)"
+  },
+  "1": { "class_type": "LoadImage", "inputs": { "image": "input.png" } },
+  "2": {
+    "class_type": "FaceRestoreCFWithModel",
+    "inputs": {
+      "image": ["1", 0],
+      "model_name": "codeformer.pth",
+      "fidelity": 0.7
+    }
+  },
+  "3": { "class_type": "SaveImage", "inputs": { "filename_prefix": "lf_restore", "images": ["2", 0] } }
+}

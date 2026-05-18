@@ -1,0 +1,36 @@
+{
+  "_lf": {
+    "description": "LTX-Video 5-second clip @ 768×512, fastest realistic video on the 7900 XT",
+    "positive_node": "6", "negative_node": "7",
+    "sampler_node": "3", "latent_node": "5",
+    "checkpoint_node": "4"
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 0, "steps": 30, "cfg": 3.0,
+      "sampler_name": "euler", "scheduler": "normal",
+      "denoise": 1.0,
+      "model": ["4", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["5", 0]
+    }
+  },
+  "4": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": { "ckpt_name": "ltx-video-2b-v0.9.safetensors" }
+  },
+  "5": {
+    "class_type": "EmptyLTXVLatentVideo",
+    "inputs": { "width": 768, "height": 512, "length": 121, "batch_size": 1 }
+  },
+  "6": { "class_type": "CLIPTextEncode", "inputs": { "text": "", "clip": ["4", 1] } },
+  "7": { "class_type": "CLIPTextEncode", "inputs": { "text": "", "clip": ["4", 1] } },
+  "8": { "class_type": "VAEDecode", "inputs": { "samples": ["3", 0], "vae": ["4", 2] } },
+  "30": {
+    "class_type": "VHS_VideoCombine",
+    "inputs": {
+      "images": ["8", 0], "frame_rate": 24, "loop_count": 0,
+      "filename_prefix": "lf_ltx", "format": "video/h264-mp4",
+      "pingpong": false, "save_output": true
+    }
+  }
+}

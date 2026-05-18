@@ -1,0 +1,31 @@
+# Core service
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+websockets==13.0
+aiofiles==24.1.0
+httpx==0.27.2
+
+# ML / image
+Pillow==10.4.0
+numpy==1.26.4
+opencv-python-headless==4.10.0.84
+
+# PyTorch (DirectML build — installed by install_directml.py with proper index URL)
+# torch==2.3.1
+# torch-directml==0.2.5.dev240914
+# torchvision==0.18.1
+
+# ComfyUI dependencies (subset; ComfyUI ships its own requirements.txt too)
+einops==0.8.0
+transformers==4.44.2
+safetensors==0.4.5
+accelerate==0.34.2
+diffusers==0.30.3
+scipy==1.13.1
+tqdm==4.66.5
+
+# Utilities
+python-multipart==0.0.9
+psutil==6.0.0
+requests==2.32.3

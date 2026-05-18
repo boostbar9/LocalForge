@@ -1,0 +1,11 @@
+{
+  "id": "anime",
+  "name": "Anime",
+  "family": "sdxl",
+  "default_model": "animagine-xl-3.1.safetensors",
+  "fallback_model": "sd_xl_base_1.0.safetensors",
+  "positive": "anime, masterpiece, best quality, vibrant colors, clean lineart, detailed eyes, screentone, soft cel shading",
+  "negative": "photo, photorealistic, 3d render, deformed, lowres, jpeg artifacts, watermark",
+  "sampler": "euler_a",
+  "scheduler": "normal"
+}
