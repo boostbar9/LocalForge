@@ -1,7 +1,6 @@
 {
   "build": {
     "beforeDevCommand": "npm --prefix ../frontend run dev",
-    "beforeBuildCommand": "npm --prefix ../frontend run build",
     "devPath": "http://localhost:5173",
     "distDir": "../frontend/dist",
     "withGlobalTauri": true
