@@ -60,10 +60,9 @@ jobs:
         run: npm run build
 
       - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^1.6" --locked
+        run: cargo install tauri-cli --version "^2.0" --locked
 
       - name: Build Tauri app (release)
-        working-directory: src-tauri
         run: cargo tauri build
         env:
           # Skip the auto-updater signing step; users can install manually.

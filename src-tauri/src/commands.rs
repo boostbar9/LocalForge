@@ -1,7 +1,6 @@
 use serde::Serialize;
-use std::path::PathBuf;
 use sysinfo::System;
-use tauri::Manager;
+use tauri_plugin_dialog::DialogExt;
 
 #[derive(Serialize)]
 pub struct SystemInfo {
@@ -30,26 +29,28 @@ pub fn reveal_in_explorer(path: String) -> Result<(), String> {
             .spawn()
             .map_err(|e| e.to_string())?;
     }
+    let _ = path; // silence unused warning on non-Windows
     Ok(())
 }
 
 #[tauri::command]
-pub async fn pick_file(filters: Vec<String>) -> Option<String> {
-    use tauri::api::dialog::blocking::FileDialogBuilder;
-    let mut b = FileDialogBuilder::new();
+pub async fn pick_file(app: tauri::AppHandle, filters: Vec<String>) -> Option<String> {
+    let mut builder = app.dialog().file();
     if !filters.is_empty() {
         let exts: Vec<&str> = filters.iter().map(|s| s.as_str()).collect();
-        b = b.add_filter("Files", &exts);
+        builder = builder.add_filter("Files", &exts);
     }
-    b.pick_file().map(|p| p.to_string_lossy().to_string())
+    builder
+        .blocking_pick_file()
+        .map(|p| p.to_string())
 }
 
 #[tauri::command]
-pub async fn pick_folder() -> Option<String> {
-    use tauri::api::dialog::blocking::FileDialogBuilder;
-    FileDialogBuilder::new()
-        .pick_folder()
-        .map(|p| p.to_string_lossy().to_string())
+pub async fn pick_folder(app: tauri::AppHandle) -> Option<String> {
+    app.dialog()
+        .file()
+        .blocking_pick_folder()
+        .map(|p| p.to_string())
 }
 
 #[tauri::command]
@@ -74,7 +75,11 @@ pub fn restart_backend(_app: tauri::AppHandle) -> Result<(), String> {
 pub fn get_system_info() -> SystemInfo {
     let mut sys = System::new_all();
     sys.refresh_all();
-    let cpu = sys.cpus().first().map(|c| c.brand().to_string()).unwrap_or_default();
+    let cpu = sys
+        .cpus()
+        .first()
+        .map(|c| c.brand().to_string())
+        .unwrap_or_default();
     SystemInfo {
         cpu,
         cores: sys.cpus().len(),
@@ -86,5 +91,7 @@ pub fn get_system_info() -> SystemInfo {
 #[tauri::command]
 pub fn is_portable_mode() -> bool {
     let exe = std::env::current_exe().unwrap_or_default();
-    exe.parent().map(|p| p.join("portable.txt").exists()).unwrap_or(false)
+    exe.parent()
+        .map(|p| p.join("portable.txt").exists())
+        .unwrap_or(false)
 }

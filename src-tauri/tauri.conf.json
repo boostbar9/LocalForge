@@ -1,54 +1,14 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "LocalForge",
+  "version": "1.1.0",
+  "identifier": "ai.localforge.app",
   "build": {
-    "beforeDevCommand": "npm --prefix ../frontend run dev",
-    "devPath": "http://localhost:5173",
-    "distDir": "../frontend/dist",
-    "withGlobalTauri": true
+    "frontendDist": "../frontend/dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "npm --prefix ../frontend run dev"
   },
-  "package": {
-    "productName": "LocalForge",
-    "version": "1.1.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": { "open": true },
-      "dialog": { "open": true, "save": true },
-      "fs": { "all": true, "scope": ["$APPDATA/**", "$APPLOCALDATA/**", "$HOME/**", "$DESKTOP/**", "$DOCUMENT/**", "$DOWNLOAD/**", "$PICTURE/**"] },
-      "path": { "all": true },
-      "process": { "exit": true },
-      "window": { "all": true }
-    },
-    "bundle": {
-      "active": true,
-      "targets": ["nsis"],
-      "identifier": "ai.localforge.app",
-      "icon": ["icons/32x32.png", "icons/128x128.png", "icons/icon.ico"],
-      "resources": ["../backend/**/*", "../resources/**/*"],
-      "externalBin": [],
-      "copyright": "© 2026 LocalForge",
-      "category": "Graphics",
-      "shortDescription": "Local AI image and video generation",
-      "longDescription": "Generate AI images and videos completely offline. No accounts, no cloud, no telemetry.",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": "",
-        "wix": { "language": "en-US" },
-        "nsis": {
-          "displayLanguageSelector": false,
-          "installerIcon": "icons/icon.ico",
-          "installMode": "perMachine",
-          "languages": ["English"]
-        }
-      }
-    },
-    "security": {
-      "csp": "default-src 'self' tauri:; img-src 'self' tauri: asset: http://127.0.0.1:8765 data: blob:; connect-src 'self' http://127.0.0.1:8765 ws://127.0.0.1:8765 ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'; script-src 'self'"
-    },
-    "updater": {
-      "active": false
-    },
+  "app": {
     "windows": [
       {
         "title": "LocalForge",
@@ -62,6 +22,30 @@
         "transparent": false,
         "theme": "Dark"
       }
-    ]
+    ],
+    "security": {
+      "csp": "default-src 'self' tauri:; img-src 'self' tauri: asset: http://127.0.0.1:8765 data: blob:; connect-src 'self' http://127.0.0.1:8765 ws://127.0.0.1:8765 ipc: http://ipc.localhost; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/icon.ico"],
+    "resources": ["../backend/**/*", "../resources/**/*"],
+    "copyright": "© 2026 LocalForge",
+    "category": "Graphics",
+    "shortDescription": "Local AI image and video generation",
+    "longDescription": "Generate AI images and videos completely offline. No accounts, no cloud, no telemetry.",
+    "windows": {
+      "wix": {
+        "language": "en-US"
+      },
+      "nsis": {
+        "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico",
+        "installMode": "perMachine",
+        "languages": ["English"]
+      }
+    }
   }
 }
