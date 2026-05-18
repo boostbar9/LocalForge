@@ -126,7 +126,7 @@ function KV({ k, v }: { k: string; v: string }) {
     </div>
   );
 }
-function Toggle({ label, hint, checked, onChange }: any) {
+function Toggle({ label, hint, checked, onChange }: { label: string; hint?: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
     <label className="flex items-start justify-between gap-3 cursor-pointer">
       <div>
@@ -142,12 +142,12 @@ function Toggle({ label, hint, checked, onChange }: any) {
     </label>
   );
 }
-function Select({ label, value, onChange, options }: any) {
+function Select({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: [string, string][] }) {
   return (
     <label className="flex items-center justify-between gap-3">
       <div className="text-sm">{label}</div>
       <select className="input max-w-[220px]" value={value} onChange={(e) => onChange(e.target.value)}>
-        {options.map(([v,l]: any) => <option key={v} value={v}>{l}</option>)}
+        {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
       </select>
     </label>
   );
